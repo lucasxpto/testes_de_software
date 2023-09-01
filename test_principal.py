@@ -29,21 +29,12 @@ class TestValidaCpf(unittest.TestCase):
         # este método deve retornar False para indicar que reconheceu o CPF como inválido
         self.assertFalse(valida_cpf('11111111111'), 'A função não reconheceu corretamente um CPF inválido.')
 
-    # Início  para os testes para a mascara do CPF
+    # Teste de unidade que verifica se a função mascara_cpf retorna o CPF formatado
     def test_mascara_cpf(self):
-        # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 3 dígitos
-        assert mascara_cpf("123") == "123." 
-        # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 6 dígitos
-        assert mascara_cpf("123.456") == "123.456." 
-        # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 9 dígitos
-        assert mascara_cpf("123.456.789") == "123.456.789-"
-        # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 10 dígitos
-        assert mascara_cpf("123.456.789-0") == "123.456.789-0"
-        # Verifica se a função mascara_cpf retorna a máscara correta para um CPF completo
-        assert mascara_cpf("123.456.789-01") == "123.456.789-01"
-
-
-
+        # Verifica se a função mascara_cpf retorna o CPF formatado
+        # Para testar: usamos CPF "529.982.247-25", que é um CPF válido
+        # A função deve retornar True para indicar que reconheceu o CPF como válido.
+        self.assertEqual(mascara_cpf('52998224725'), '529.982.247-25', 'A função não formatou corretamente o CPF.')
 
 # Verifica se este arquivo é o ponto de entrada do programa
 if __name__ == '__main__':

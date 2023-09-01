@@ -46,13 +46,24 @@ def valida_cpf(cpf):
     # Retorna True se os digitos calculados correspondem aos digitos do CPF
     return  cpf[-2:] == f'{calcula_digito(digito1)}{calcula_digito(digito2)}'
 
- # Separando a mascara do CPF
-def mascara_cpf(cpf: str) -> str:
-    n = len(cpf.replace('.', '').replace('-', ''))  # Conta a quantidade de caracteres no CPF sem pontuação
-    if n == 3 or n == 6:
-        # Se o CPF tem 3 ou 6 caracteres sem a pontuação, adiciona um ponto
-        cpf += '.'
-    elif n == 9:
-        # Se o CPF tem 9 caracteres sem a pontuação, adiciona um hífen
-        cpf += '-'
-    return cpf  # Retorna o CPF com a máscara
+ # Função que formata o CPF
+def mascara_cpf(cpf: str) -> str: # -> str: indica que a função retorna uma string
+    # Remove caracteres não numéricos do CPF
+    raw = ''.join(filter(str.isdigit, cpf))
+    # verifica o tamanho do CPF
+    length = len(raw)
+    # Verifica se o CPF tem 3 digitos ou menos
+    if length <= 3:
+        # Retorna o CPF sem formatação
+        return raw
+    # Verifica se o CPF tem 6 digitos ou menos
+    elif length <= 6:
+        # Retorna o CPF com a formatação 000.000
+        return f"{raw[:3]}.{raw[3:]}"
+    # Verifica se o CPF tem 9 digitos ou menos
+    elif length <= 9:
+        # Retorna o CPF com a formatação 000.000.000
+        return f"{raw[:3]}.{raw[3:6]}.{raw[6:]}"
+    else:
+        # Retorna o CPF com a formatação 000.000.000-00
+        return f"{raw[:3]}.{raw[3:6]}.{raw[6:9]}-{raw[9:]}"

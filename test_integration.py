@@ -56,5 +56,19 @@ def test_valida_cpf_integration_invalido(mocker):
         app.pede_cpf()
         # Verificar se a função 'print' fol chamada cosa saída esperada 
         mock_print.assert_called_with('Encerrando o programa...')
-
-        
+# simular um usuário que pressionou a tecla de backspace enquanto digitava seu CPF.
+def test_valida_cpf_integration_with_backspace(mocker):
+    # Instanciar a classe App do módulo principal.py
+    app = App()
+    # CPF com backspace
+    cpf_with_backspace = '12345\x7f6789\x7f0909'
+    # Adicionar mais caracteres à entrada do usuário (vários "Enter") para evitar a exceção StopIteration
+    user_input = list(cpf_with_backspace + '\n' + '\n' + '\n')
+    # Simular a entrada do usuário
+    with patch('readchar.readchar', side_effect=user_input):
+        # Substituir a função 'print' embutida por um objeto de simulação
+        mock_print = mocker.patch('builtins.print')
+        # Executar o método 'pede_cpf' da classe 'App'
+        app.pede_cpf()
+        # Verificar se a função 'print' foi chamada com a saída esperada
+        mock_print.assert_called_with('Encerrando o programa...')
