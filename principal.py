@@ -1,3 +1,8 @@
+"""
+Claudinei de Oliveira - UTF8- pt-br - 18-88-2823
+Aluno: Lucas Pedreira Vital
+principal.py
+"""
 import readchar
 from validar_cpf import valida_cpf, mascara_cpf
 import time

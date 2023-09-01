@@ -1,5 +1,6 @@
 """
 Claudinei de Oliveira - UTF8 - pt-br - 18-08-2023
+Aluno: Lucas Pedreira Vital
 testa_cpf.py
 """
 
