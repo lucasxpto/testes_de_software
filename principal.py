@@ -25,11 +25,9 @@ class App:
         cpf = ''  # Inicializa a variável cpf como um string vazia
         while True:  # Loop infinito
             char = readchar.readchar()  # Lê um caractere do teclado
-
             # Adiciona um contre para interromper a leitura se o número de caracteres do CPF exceder o l.
             if len(cpf) >= 14:
                 break
-
             # Verifica se o caracter é um Enter
             if char == '\r' or char == '\n':
                 # Se for, interrompe o loop
@@ -41,7 +39,7 @@ class App:
                 cpf = mascara_cpf(cpf)  # Aplica a máscara do CPF
 
             # Verifica se o caractere é um Backspace e se há caracteres no CPF
-            elif char == '\x7f' and cpf:
+            elif char == '\x7f' or char == '^?' and len(cpf) > 0:
                 # Se for, remove o último caractere do CPF
                 cpf = cpf[:-1]
 

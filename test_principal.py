@@ -29,27 +29,19 @@ class TestValidaCpf(unittest.TestCase):
         # este método deve retornar False para indicar que reconheceu o CPF como inválido
         self.assertFalse(valida_cpf('11111111111'), 'A função não reconheceu corretamente um CPF inválido.')
 
-# Início  para os testes para a mascara do CPF
-def test_mascara_cpf_3_digitos():
-    # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 3 dígitos
-    assert mascara_cpf("123") == "123." 
+    # Início  para os testes para a mascara do CPF
+    def test_mascara_cpf(self):
+        # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 3 dígitos
+        assert mascara_cpf("123") == "123." 
+        # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 6 dígitos
+        assert mascara_cpf("123.456") == "123.456." 
+        # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 9 dígitos
+        assert mascara_cpf("123.456.789") == "123.456.789-"
+        # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 10 dígitos
+        assert mascara_cpf("123.456.789-0") == "123.456.789-0"
+        # Verifica se a função mascara_cpf retorna a máscara correta para um CPF completo
+        assert mascara_cpf("123.456.789-01") == "123.456.789-01"
 
-def test_mascara_cpf_6_digitos():
-    # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 6 dígitos
-    assert mascara_cpf("123.456") == "123.456." 
-
-def test_mascara_cpf_9_digitos():
-    # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 9 dígitos
-    assert mascara_cpf("123.456.789") == "123.456.789-"
-
-def test_mascara_cpf_10_digitos():
-    # Verifica se a função mascara_cpf retorna a máscara correta para um CPF com 10 dígitos
-    assert mascara_cpf("123.456.789-0") == "123.456.789-0"
-
-def test_mascara_cpf_11_digitos():
-    # Verifica se a função mascara_cpf retorna a máscara correta para um CPF completo
-    assert mascara_cpf("123.456.789-01") == "123.456.789-01"
-# Fim dos testes para a mascara do CPF
 
 
 
