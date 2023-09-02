@@ -68,7 +68,7 @@ class App:
             # Imprime o CPF atualizado
             print(f'{prompt}{cpf_formatado}', end='')
             # Coloca o cursor na posição correta
-            ajusta_posicao_cursor = cursor_pos + cpf_formatado.count('.') + cpf_formatado.count('-')
+            ajusta_posicao_cursor = cursor_pos + cpf_formatado.count('.') + cpf_formatado.count('-') + 1
 
             # Move o cursor para a posição correta
             print(f'\033[{len(prompt) + ajusta_posicao_cursor}G', end='', flush=True)
@@ -88,9 +88,19 @@ class App:
             if valida_cpf(cpf): # Se o CPF for válido
                 print(f'\nCPF válido: {cpf}! Continue com a operação!!!')
             else:
+                # Move o cursor para o início da linha
+                print('\r', end='', flush=True)
+                # Apaga a linha inteira
+                print('\033[K', end='', flush=True)
+                # Move o cursor uma linha acima e apaga (onde a mensagem de CPF inválido foi impressa)
+                print('\033[A\033[2K', end='', flush=True)
+                # Move o cursor uma linha acima e apaga (onde o CPF inválido foi digitado)
+                print('\033[A\033[2K', end='', flush=True)
+               
                 # Se o CPF for inválido
                 print(f'\nCPF inválido: {cpf}! Por favor, tente novamente!!!')
                 time.sleep(1) # Aguarda 1 segundo antes de continuar
+                
 
 if __name__ == '__main__':
     # Instancia a classe App
